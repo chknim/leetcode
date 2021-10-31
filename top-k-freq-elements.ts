@@ -1,28 +1,33 @@
 /**
-Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
-Example 1:
-Input: nums = [1,1,1,2,2,3], k = 2
-Output: [1,2]
+  Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
+  Example 1:
+  Input: nums = [1,1,1,2,2,3], k = 2
+  Output: [1,2]
 
-Example 2:
-Input: nums = [1], k = 1
-Output: [1]
- 
-Constraints:
+  Example 2:
+  Input: nums = [1], k = 1
+  Output: [1]
+  
+  Constraints:
 
-1 <= nums.length <= 105
-k is in the range [1, the number of unique elements in the array].
-It is guaranteed that the answer is unique.
- 
+  1 <= nums.length <= 105
+  k is in the range [1, the number of unique elements in the array].
+  It is guaranteed that the answer is unique.
+  
 
-Follow up: Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
+  Follow up: Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
 **/
 
 /**
- * Result
+ * Resolution: Testing speed of not using data structure such as Heap or priority queue 
+ * 
+ * Result Option #1
  * Runtime: 88 ms, faster than 82.17% of JavaScript online submissions for Top K Frequent Elements.
  * Memory Usage: 41.4 MB, less than 94.25% of JavaScript online submissions for Top K Frequent Elements.
  *
+ * Result Option #2
+ * Runtime: 76 ms, faster than 98.61% of JavaScript online submissions for Top K Frequent Elements.
+ * Memory Usage: 42.2 MB, less than 52.85% of JavaScript online submissions for Top K Frequent Elements.
  */
 
 /**
@@ -45,6 +50,7 @@ var topKFrequent = function(nums, k) {
   }
   // Return top K O(m*log(m)) + O(k); m <= n & k < n
   freqPairList.sort((a, b) => {
+    // Option #1
     const aFreq = a[1];
     const bFreq = b[1];
     if (aFreq === bFreq) {
@@ -52,6 +58,8 @@ var topKFrequent = function(nums, k) {
     } else {
       return aFreq < bFreq ? 1 : -1;
     }
+    // Option #2
+    // return b[1] - a[1];
   });
   return freqPairList.slice(0, k).map(pair => pair[0]);
 };
