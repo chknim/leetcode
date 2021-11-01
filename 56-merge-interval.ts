@@ -34,9 +34,11 @@ intervals[i].length == 2
  */
 var merge = function (intervals) {
   let interims = [...intervals];
+  // O(n*log(n))
   interims.sort((a, b) => a[0] - b[0]);
   let current = interims.shift();
   const result = [];
+  // O(n)
   while (interims.length > 0) {
     const next = interims[0];
     if (next[0] > current[1]) {
